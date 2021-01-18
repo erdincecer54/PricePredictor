@@ -1,0 +1,81 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Audi Price Prediction";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+
+
+<div class="container-fluid">
+
+    <table>
+        <tr>
+            <td>
+                <p> Select Model: </p>
+            </td>
+            <td>
+                <select id="model" class="form-control form-control-sm">
+                    <option>A1</option>
+                    <option>A2</option>
+                    <option>A3</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p> Select Model Year: </p>
+            </td>
+            <td>
+                <input type="text" id="datepicker" />
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Enter Milage:
+            </td>
+            <td>
+                <input id="milage" type="number" min="0" step="any"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Enter Miles per Gallon:
+            </td>
+            <td>
+                <input id="mpg" type="number" min="0" step="any" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Select Engine Size:
+            </td>
+            <td>
+                <input id="enginesize" type="number" min="0" max="10" step="any"/>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p id="funct"></p>
+            </td>
+            <td>
+                <button type="submit" onclick="Calculate()"> Calculate </button>
+            </td>
+        </tr>
+
+        
+    </table>
+
+
+</div>
+
+<script>
+    function Calculate() {
+        document.getElementById("funct").innerHTML= "yarak";
+    }
+</script>
