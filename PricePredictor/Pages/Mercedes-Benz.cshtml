@@ -1,50 +1,160 @@
 ﻿@page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Mercedes-Benz Price Prediction";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>Please, enter model details to find fair value of your car.</p>
 
 
-
-<div>
+<div class="container-fluid">
 
     <table>
-        <tr >
+        <tr>
             <td>
-                <p> Model </p>
-            </td>
-            <td> 
-
+                <p> Select Model: </p>
             </td>
             <td>
-
+                <select id="model" class="form-control form-control-sm">
+                    <option id="1m">180</option>
+                    <option id="2m">200</option>
+                    <option id="3m">220</option>
+                    <option id="4m">A Class</option>
+                    <option id="5m">B Class</option>
+                    <option id="6m">C Class</option>
+                    <option id="7m">CL Class</option>
+                    <option id="8m">CLA Class</option>
+                    <option id="9m">CLC Class</option>
+                    <option id="10m">CLK</option>
+                    <option id="11m">CLS Class</option>
+                    <option id="12m">E Class</option>
+                    <option id="13m">G Class</option>
+                    <option id="14m">GL Class</option>
+                    <option id="15m">GLA Class</option>
+                    <option id="16m">GLB Class</option>
+                    <option id="17m">GLC Class</option>
+                    <option id="18m">GLE Class</option>
+                    <option id="19m">GLS Class</option>
+                    <option id="20m">M Class</option>
+                    <option id="21m">R Class</option>
+                    <option id="22m">S Class</option>
+                    <option id="23m">SL Class</option>
+                    <option id="24m">SLK</option>
+                    <option id="25m">V Class</option>
+                    <option id="26m">X Class</option>
+                </select>
             </td>
         </tr>
-        <tr >
+        <tr>
             <td>
-
+                <p> Select Model Year: </p>
             </td>
             <td>
+                <input type="number" id="datepicker" />
+            </td>
 
+        </tr>
+        <tr>
+            <td>
+                Enter Milage:
             </td>
             <td>
-
+                <input id="milage" type="number" min="0" step="any" />
             </td>
         </tr>
-        <tr >
-            <td>
 
+        <tr>
+            <td>
+                Select Engine Size:
             </td>
             <td>
+                <input id="enginesize" type="number" min="0" max="10" step="any" />
+            </td>
+        </tr>
 
+        <tr>
+            <td>
+                Enter Transmission Type:
             </td>
             <td>
-
+                <select id="transmission" class="form-control form-control-sm">
+                    <option id="1t">Automatic</option>
+                    <option id="2t">Manual</option>
+                    <option id="3t">Semi-Automatic</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Fuel Type:
+            </td>
+            <td>
+                <select id="fuel" class="form-control form-control-sm">
+                    <option id="1f">Diesel</option>
+                    <option id="2f">Hybrid</option>
+                    <option id="3f">Petrol</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Enter Miles per Gallon:
+            </td>
+            <td>
+                <input id="mpg" type="number" min="0" step="any" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <button type="submit" onclick="Calculate()"> Calculate </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p> Bana gelişi bu kardeşim </p>
+            </td>
+            <td>
+                <p id="funct"></p>
             </td>
         </tr>
     </table>
 
+
 </div>
+
+<script>
+
+    var coeffs = [1701.429, -0.119, -94.144, -192.302, -8851.913, -11423.551, -6921.067, -6929.986, -6785.012, -12344.942, 2242.496, -1246.803, -3838.077, 75528.282, -4081.892, -8105.845, -1662.269, -91.062, 6184.791, 10548.534, -3537.102, -6564.486, 13680.452, 65.668, -6075.132, -1197.29, -7065.411, -4835.396, -6692.986, -0.0, -2436.789, 3728.185, -1291.396, 1103.673, -1948.146, 844.473]
+        ;
+
+    function Calculate() {
+
+        var model = document.getElementById("model");
+        var modelid = parseInt(model.options[model.selectedIndex].id);
+
+        var fuel = document.getElementById("fuel");
+        var fuelid = parseInt(fuel.options[fuel.selectedIndex].id);
+
+        var transmission = document.getElementById("transmission");
+        var transmissionid = parseInt(transmission.options[transmission.selectedIndex].id);
+
+        var intercept = -3386734
+            ;
+
+
+        var result = coeffs[0] * document.getElementById("datepicker").value +
+            coeffs[1] * document.getElementById("milage").value +
+            coeffs[2] * document.getElementById("enginesize").value +
+            coeffs[3] * document.getElementById("mpg").value +
+            coeffs[3 + modelid] * 1 +
+            coeffs[29 + fuelid] * 1 +
+            coeffs[32 + transmissionid] * 1
+            + intercept
+            ;
+
+        document.getElementById("funct").innerHTML = result;
+    }
+</script>

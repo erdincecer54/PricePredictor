@@ -1,50 +1,145 @@
 ﻿@page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Skoda Price Prediction";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>Please, enter model details to find fair value of your car.</p>
 
 
-
-<div>
+<div class="container-fluid">
 
     <table>
-        <tr >
+        <tr>
             <td>
-                <p> Model </p>
-            </td>
-            <td> 
-
+                <p> Select Model: </p>
             </td>
             <td>
-
+                <select id="model" class="form-control form-control-sm">
+                    <option id="1m">Citigo</option>
+                    <option id="2m">Fabia</option>
+                    <option id="3m">Kamiq</option>
+                    <option id="4m">Karoq</option>
+                    <option id="5m">Kodiaq</option>
+                    <option id="6m">Octavia</option>
+                    <option id="7m">Rapid</option>
+                    <option id="8m">Roomster</option>
+                    <option id="9m">Scala</option>
+                    <option id="10m">SuperB</option>
+                    <option id="11m">Yeti</option>
+                    <option id="12m">Yeti Outdoor</option>
+                </select>
             </td>
         </tr>
-        <tr >
+        <tr>
             <td>
-
+                <p> Select Model Year: </p>
             </td>
             <td>
+                <input type="number" id="datepicker" />
+            </td>
 
+        </tr>
+        <tr>
+            <td>
+                Enter Milage:
             </td>
             <td>
-
+                <input id="milage" type="number" min="0" step="any" />
             </td>
         </tr>
-        <tr >
-            <td>
 
+        <tr>
+            <td>
+                Select Engine Size:
             </td>
             <td>
+                <input id="enginesize" type="number" min="0" max="10" step="any" />
+            </td>
+        </tr>
 
+        <tr>
+            <td>
+                Enter Transmission Type:
             </td>
             <td>
-
+                <select id="transmission" class="form-control form-control-sm">
+                    <option id="1t">Automatic</option>
+                    <option id="2t">Manual</option>
+                    <option id="3t">Semi-Automatic</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Fuel Type:
+            </td>
+            <td>
+                <select id="fuel" class="form-control form-control-sm">
+                    <option id="1f">Diesel</option>
+                    <option id="2f">Hybrid</option>
+                    <option id="3f">Petrol</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Enter Miles per Gallon:
+            </td>
+            <td>
+                <input id="mpg" type="number" min="0" step="any" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <button type="submit" onclick="Calculate()"> Calculate </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p> Bana gelişi bu kardeşim </p>
+            </td>
+            <td>
+                <p id="funct"></p>
             </td>
         </tr>
     </table>
 
+
 </div>
+
+<script>
+
+    var coeffs = [838.046, -0.057, -23.948, -224.306, -2892.962, -2146.784, 1859.104, 3415.551, 5766.266, 306.72, -2156.917, -3298.649, -633.074, 2604.782, -1831.635, -992.404, -11707.214, 26486.09, -14778.876, 550.077, -1110.36, 560.283]
+        ;
+
+    function Calculate() {
+
+        var model = document.getElementById("model");
+        var modelid = parseInt(model.options[model.selectedIndex].id);
+
+        var fuel = document.getElementById("fuel");
+        var fuelid = parseInt(fuel.options[fuel.selectedIndex].id);
+
+        var transmission = document.getElementById("transmission");
+        var transmissionid = parseInt(transmission.options[transmission.selectedIndex].id);
+
+        var intercept = -1648559;
+
+
+        var result = coeffs[0] * document.getElementById("datepicker").value +
+            coeffs[1] * document.getElementById("milage").value +
+            coeffs[2] * document.getElementById("enginesize").value +
+            coeffs[3] * document.getElementById("mpg").value +
+            coeffs[3 + modelid] * 1 +
+            coeffs[15 + fuelid] * 1 +
+            coeffs[18 + transmissionid] * 1
+            + intercept
+            ;
+
+        document.getElementById("funct").innerHTML = result;
+    }
+</script>

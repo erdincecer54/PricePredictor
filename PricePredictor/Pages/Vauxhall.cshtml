@@ -1,50 +1,155 @@
 ﻿@page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Vauxhall Price Prediction";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>Please, enter model details to find fair value of your car.</p>
 
 
-
-<div>
+<div class="container-fluid">
 
     <table>
-        <tr >
+        <tr>
             <td>
-                <p> Model </p>
-            </td>
-            <td> 
-
+                <p> Select Model: </p>
             </td>
             <td>
-
+                <select id="model" class="form-control form-control-sm">
+                    <option id="1m">Adam</option>
+                    <option id="2m">Agila</option>
+                    <option id="3m">Ampera</option>
+                    <option id="4m">Antara</option>
+                    <option id="5m">Astra</option>
+                    <option id="6m">Cascada</option>
+                    <option id="7m">Combo Life</option>
+                    <option id="8m">Corsa</option>
+                    <option id="9m">Crossland X</option>
+                    <option id="10m">GTC</option>
+                    <option id="11m">Grandland X</option>
+                    <option id="12m">Insignia</option>
+                    <option id="13m">Kadjar</option>
+                    <option id="14m">Meriva</option>
+                    <option id="15m">Mokka</option>
+                    <option id="16m">Mokka X</option>
+                    <option id="17m">Tigra</option>
+                    <option id="18m">Vectra</option>
+                    <option id="19m">Viva</option>
+                    <option id="20m">Vivaro</option>
+                    <option id="21m">Zafira</option>
+                    <option id="22m">Zafira Tourer</option>
+                </select>
             </td>
         </tr>
-        <tr >
+        <tr>
             <td>
-
+                <p> Select Model Year: </p>
             </td>
             <td>
+                <input type="number" id="datepicker" />
+            </td>
 
+        </tr>
+        <tr>
+            <td>
+                Enter Milage:
             </td>
             <td>
-
+                <input id="milage" type="number" min="0" step="any" />
             </td>
         </tr>
-        <tr >
-            <td>
 
+        <tr>
+            <td>
+                Select Engine Size:
             </td>
             <td>
+                <input id="enginesize" type="number" min="0" max="10" step="any" />
+            </td>
+        </tr>
 
+        <tr>
+            <td>
+                Enter Transmission Type:
             </td>
             <td>
-
+                <select id="transmission" class="form-control form-control-sm">
+                    <option id="1t">Automatic</option>
+                    <option id="2t">Manual</option>
+                    <option id="3t">Semi-Automatic</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Fuel Type:
+            </td>
+            <td>
+                <select id="fuel" class="form-control form-control-sm">
+                    <option id="1f">Diesel</option>
+                    <option id="2f">Electric</option>
+                    <option id="3f">Petrol</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Enter Miles per Gallon:
+            </td>
+            <td>
+                <input id="mpg" type="number" min="0" step="any" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <button type="submit" onclick="Calculate()"> Calculate </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p> Bana gelişi bu kardeşim </p>
+            </td>
+            <td>
+                <p id="funct"></p>
             </td>
         </tr>
     </table>
 
+
 </div>
+
+<script>
+
+    var coeffs = [719.985, -0.053, -31.383, -45.299, -3328.075, -3079.874, -0.0, -1620.471, -1014.952, -231.854, 908.752, -3189.66, -787.173, -1023.911, 3176.993, 101.769, 18635.193, -3199.427, -1095.367, -533.662, -568.392, 215.214, -5421.237, 3586.881, -838.336, -692.414, 580.309, 0.0, -580.309, 353.256, -682.063, 328.807]
+        ;
+
+    function Calculate() {
+
+        var model = document.getElementById("model");
+        var modelid = parseInt(model.options[model.selectedIndex].id);
+
+        var fuel = document.getElementById("fuel");
+        var fuelid = parseInt(fuel.options[fuel.selectedIndex].id);
+
+        var transmission = document.getElementById("transmission");
+        var transmissionid = parseInt(transmission.options[transmission.selectedIndex].id);
+
+        var intercept = -1435451;
+
+
+        var result = coeffs[0] * document.getElementById("datepicker").value +
+            coeffs[1] * document.getElementById("milage").value +
+            coeffs[2] * document.getElementById("enginesize").value +
+            coeffs[3] * document.getElementById("mpg").value +
+            coeffs[3 + modelid] * 1 +
+            coeffs[25 + fuelid] * 1 +
+            coeffs[28 + transmissionid] * 1
+            + intercept
+            ;
+
+        document.getElementById("funct").innerHTML = result;
+    }
+</script>

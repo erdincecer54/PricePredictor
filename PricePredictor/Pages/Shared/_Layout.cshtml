@@ -16,8 +16,9 @@
 
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <header style="position: fixed; top: 0; width: 100%;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light heavy-rain-gradient color-block box-shadow mb-3 text-white" style="background-color: rgba(245, 245, 245, 0.2);">
+            <left> <img src="~/images/logo.png" style="width:125px;" /> </left> 
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">PricePredictor</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -32,12 +33,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Predictor">Price Predictor</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/AboutUs">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Contact">Contact</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="container" style="padding-top:100px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -49,7 +57,7 @@
         </div>
     </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    
+
     <script>
         var slideIndex = 1;
         showSlides(slideIndex);
