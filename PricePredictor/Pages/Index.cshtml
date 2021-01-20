@@ -4,62 +4,81 @@
     ViewData["Title"] = "Home page";
 }
 <div class="text-center">
-    <h1 class="display-4">Welcome to Price Predictor</h1>
-
-    <div class="slideshow-container">
-
-        <div class="mySlides fade">
-            <div class="numbertext">1 / 3</div>
-            <img src="https://www.w3schools.com/howto/img_nature_wide.jpg" style="width:100%">
-            <div class="text">BASLIK1</div>
+    
+    <div >
+        <img src="~/images/logo.png" style="width:28%;"/>
+    </div>
+    @*<div class="slideshow-container">
+        <div class="mySlides1">
+            <img src="~/images/slide4.png" style="width:90%">
+        </div>
+        <div class="mySlides1">
+            <img src="~/images/slide1.jpg" style="width:90%">
         </div>
 
-        <div class="mySlides fade">
-            <div class="numbertext">2 / 3</div>
-            <img src="https://www.w3schools.com/howto/img_nature_wide.jpg" style="width:100%">
-            <div class="text">BASLIK2</div>
+        <div class="mySlides1">
+            <img src="~/images/slide2.jpg" style="width:90%">
         </div>
 
-        <div class="mySlides fade">
-            <div class="numbertext">3 / 3</div>
-            <img src="https://www.w3schools.com/howto/img_nature_wide.jpg" style="width:100%">
-            <div class="text">BASLIK3</div>
+        <div class="mySlides1">
+            <img src="~/images/slide3.jpg" style="width:90%">
         </div>
 
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
+        <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
     </div>
     <br>
 
     <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-    </div>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>*@
 
     &nbsp;
     &nbsp;
-    
-    <div style="background-color: rgba(245, 245, 245, 0.4); padding:15px;">
+
+    <div style="background-color: rgba(245, 245, 245, 0.8); padding:15px;">
         <div class="text-center">
             <h2 class="display-4">How it works?</h2>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    One of three columns
+                    <img src="~/images/icon1.png" style="max-width:45px;" />
+                    <br />1. Select your car's brand. <br />2. Tell us about its condition. <br/>3. Learn its value precisely!
                 </div>
                 <div class="col-sm">
-                    One of three columns
+                    <img src="~/images/icon2.png" style="max-width:110px;"/>
+                    <br />Smart prediction models.<br />1M+ different data processed. <br />Trusted results.
                 </div>
                 <div class="col-sm">
-                    One of three columns
+                    <img src="~/images/icon3.png" style="max-width:50px;"/>
+                    <br />Easy to use. <br /> No login needed. <br /> Its free, and always will be!
                 </div>
             </div>
         </div>
     </div>
 
 </div>
+<script>
+    var slideIndex = [1, 1];
+    var slideId = ["mySlides1", "mySlides2"]
+    showSlides(1, 0);
+    showSlides(1, 1);
 
+    function plusSlides(n, no) {
+        showSlides(slideIndex[no] += n, no);
+    }
 
+    function showSlides(n, no) {
+        var i;
+        var x = document.getElementsByClassName(slideId[no]);
+        if (n > x.length) { slideIndex[no] = 1 }
+        if (n < 1) { slideIndex[no] = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex[no] - 1].style.display = "block";
+    }
+</script>

@@ -9,16 +9,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet" />
  
-
-
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-
 </head>
 <body>
-    <header style="position: fixed; top: 0; width: 100%;">
+    <header style="position: fixed; top: 0; width: 100%; z-index: 99;">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light heavy-rain-gradient color-block box-shadow mb-3 text-white" style="background-color: rgba(245, 245, 245, 0.2);">
-            <left> <img src="~/images/logo.png" style="width:125px;" /> </left> 
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">PricePredictor</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -57,35 +53,6 @@
         </div>
     </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    <script>
-        var slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("dot");
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active";
-        }
-    </script>
 
     <script>
         $("#datepicker").datepicker({
